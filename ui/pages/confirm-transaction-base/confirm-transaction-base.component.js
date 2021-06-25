@@ -146,6 +146,9 @@ export default class ConfirmTransactionBase extends Component {
     supportsEIP1559: PropTypes.bool,
     hardwareWalletRequiresConnection: PropTypes.bool,
     isMultiLayerFeeNetwork: PropTypes.bool,
+    isFailedTransaction: PropTypes.bool,
+    removeTxFromFailedTxesToDisplay: PropTypes.bool,
+    addTxToFailedTxesToDisplay: PropTypes.bool,
   };
 
   state = {
@@ -782,6 +785,18 @@ export default class ConfirmTransactionBase extends Component {
     });
   }
 
+  handleFailedTxClose() {
+    const {
+      mostRecentOverviewPage,
+      txData,
+      removeTxFromFailedTxesToDisplay,
+      history,
+    } = this.props;
+
+    removeTxFromFailedTxesToDisplay(txData.id);
+    history.push(mostRecentOverviewPage);
+  }
+
   handleSubmit() {
     const {
       sendTransaction,
@@ -793,6 +808,7 @@ export default class ConfirmTransactionBase extends Component {
       maxFeePerGas,
       maxPriorityFeePerGas,
       baseFeePerGas,
+      addTxToFailedTxesToDisplay,
     } = this.props;
     const { submitting } = this.state;
 
@@ -840,6 +856,7 @@ export default class ConfirmTransactionBase extends Component {
             );
           })
           .catch((error) => {
+            addTxToFailedTxesToDisplay(txData.id);
             this.setState({
               submitting: false,
               submitError: error.message,
@@ -1004,6 +1021,7 @@ export default class ConfirmTransactionBase extends Component {
       gasFeeIsCustom,
       nativeCurrency,
       hardwareWalletRequiresConnection,
+      isFailedTransaction,
     } = this.props;
     const {
       submitting,
@@ -1104,6 +1122,7 @@ export default class ConfirmTransactionBase extends Component {
           handleCloseEditGas={() => this.handleCloseEditGas()}
           currentTransaction={txData}
           supportsEIP1559V2={this.supportsEIP1559V2}
+          isFailedTransaction={isFailedTransaction}
         />
       </TransactionModalContextProvider>
     );
