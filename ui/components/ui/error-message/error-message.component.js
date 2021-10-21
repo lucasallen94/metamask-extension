@@ -36,8 +36,8 @@ ErrorMessage.propTypes = {
    * The translate key for localization. Uses context.t(). Will override the error message
    */
   errorKey: PropTypes.string,
-  linkText: PropTypes.string,
-  onErrorMessageClick: PropTypes.func,
+  linkText: PropTypes.string.isRequired,
+  onErrorMessageClick: PropTypes.func.isRequired,
 };
 
 ErrorMessage.contextTypes = {
