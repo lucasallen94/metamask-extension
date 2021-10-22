@@ -13,10 +13,14 @@ const ErrorMessage = (props, context) => {
         className="error-message__icon"
       />
       <div className="error-message__text">
-        {error}{' '}
-        <span className="error-message__link" onClick={onErrorMessageClick}>
-          {linkText}
-        </span>
+        {error}
+        {linkText ? (
+          <span className="error-message__link" onClick={onErrorMessageClick}>
+            {` ${linkText}`}
+          </span>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );
@@ -31,8 +35,8 @@ ErrorMessage.propTypes = {
    * The translate key for localization. Uses context.t(). Will override the error message
    */
   errorKey: PropTypes.string,
-  linkText: PropTypes.string.isRequired,
-  onErrorMessageClick: PropTypes.func.isRequired,
+  linkText: PropTypes.string,
+  onErrorMessageClick: PropTypes.func,
 };
 
 ErrorMessage.contextTypes = {
