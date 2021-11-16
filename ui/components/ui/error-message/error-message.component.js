@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ErrorMessage = (props, context) => {
-  const { errorMessage, errorKey, onErrorMessageClick, linkText } = props;
+  const { errorMessage, errorKey } = props;
   const error = errorKey ? context.t(errorKey) : errorMessage;
 
   return (
@@ -12,16 +12,7 @@ const ErrorMessage = (props, context) => {
         alt=""
         className="error-message__icon"
       />
-      <div className="error-message__text">
-        {error}
-        {linkText ? (
-          <a className="error-message__link" onClick={onErrorMessageClick}>
-            {` ${linkText}`}
-          </a>
-        ) : (
-          ''
-        )}
-      </div>
+      <div className="error-message__text">{error}</div>
     </div>
   );
 };
@@ -35,8 +26,6 @@ ErrorMessage.propTypes = {
    * The translate key for localization. Uses context.t(). Will override the error message
    */
   errorKey: PropTypes.string,
-  linkText: PropTypes.string,
-  onErrorMessageClick: PropTypes.func,
 };
 
 ErrorMessage.contextTypes = {
