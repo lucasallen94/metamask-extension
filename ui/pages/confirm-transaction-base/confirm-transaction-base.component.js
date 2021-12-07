@@ -1118,7 +1118,6 @@ export default class ConfirmTransactionBase extends Component {
               ? this.handleFailedTxClose()
               : this.handleSubmit()
           }
-          onConfirmAnyways={() => this.handleConfirmAnyways()}
           setUserAcknowledgedGasMissing={this.setUserAcknowledgedGasMissing}
           hideSenderToRecipient={hideSenderToRecipient}
           origin={txData.origin}
