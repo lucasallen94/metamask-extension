@@ -147,7 +147,7 @@ export default class ConfirmTransactionBase extends Component {
     hardwareWalletRequiresConnection: PropTypes.bool,
     isMultiLayerFeeNetwork: PropTypes.bool,
     isFailedTransaction: PropTypes.bool,
-    removeTransactionsDisplayedOnFailure: PropTypes.func,
+    removeTransactionToDisplayOnFailure: PropTypes.func,
     addTransactionToDisplayOnFailure: PropTypes.func,
   };
 
@@ -789,11 +789,11 @@ export default class ConfirmTransactionBase extends Component {
     const {
       mostRecentOverviewPage,
       txData,
-      removeTransactionsDisplayedOnFailure,
+      removeTransactionToDisplayOnFailure,
       history,
     } = this.props;
 
-    removeTransactionsDisplayedOnFailure(txData.id);
+    removeTransactionToDisplayOnFailure(txData.id);
     history.push(mostRecentOverviewPage);
   }
 
